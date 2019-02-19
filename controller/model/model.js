@@ -24,7 +24,7 @@ class model{
 		let pageNo = (params.pageNo-1)*pageSize;
 		let keyArray = []
 		for(let key in params){
-			if(key!=='pageSize' && key!=='pageNo'){
+			if(key!=='pageSize' && key!=='pageNo'  && key!=='like'){
 				keyArray.push({key:key,value:params[key]})
 			}
 		}
@@ -47,6 +47,20 @@ class model{
 			})
 			zanwei = zanwei+sqlstr
 			countSql = countSql+sqlstr
+		}
+		
+		if(params.like){
+			let like = params.like;
+			let likeKey,likeValue;
+			for(let k in like){
+				likeKey = k;
+				likeValue = like[k];
+			}
+			if(keyArray.length>0){
+				zanwei = zanwei + ` and ${likeKey} like "%${likeValue}%" `
+			}else{
+				zanwei = `where ${likeKey} like "%${likeValue}%" `
+			}
 		}
 		let sql = `select * from model ${zanwei} order by id desc limit ?,? `;
 		sqlArray = [...zanweiArray,...sqlArray]

@@ -8,7 +8,7 @@ const model = require('./router/model');
 module.exports = function(app){
 // 	app.use(product.routes()).use(product.allowedMethods())
 // 	app.use(common.routes()).use(common.allowedMethods())
-	app.use(user.routes()).use(adminUser.allowedMethods())
+	app.use(adminUser.routes()).use(adminUser.allowedMethods())
 
 	//这里也替换掉
 }
